@@ -1,7 +1,12 @@
 ﻿namespace Mindbox.Task.Shapes;
-
+/// <summary>
+/// Класс, представляющий сущность треугольник, наследованный от базового класса.
+/// </summary>
 public class Triangle : FigureBase
 {
+    /// <summary>
+    /// Отсортированный список сторон треугольника
+    /// </summary>
     private List<double> _sides = new List<double>(3);
 
     public bool _isRight { get; }
@@ -19,8 +24,12 @@ public class Triangle : FigureBase
         _isRight = isRightTriangle();
     }
 
-
-
+    /// <summary>
+    /// Метод, высчитывающий площать треугольника по двум сценариям:
+    /// 1) Если треугольник - прямоугольный - считывается по формуле S = 1/2 * a * b;
+    /// 2) Если треугольник - обычный - считается по 1-ой формуле Герона;
+    /// </summary>
+    /// <returns>Площадь треугольника</returns>
     public override double CalculateArea()
     {
         if (_isRight) return _sides[0] * _sides[1] / 2;
@@ -31,6 +40,13 @@ public class Triangle : FigureBase
         #endregion
     }
 
+    /// <summary>
+    /// Метод, проверяющий существование треугольника с исходными данными.
+    /// </summary>
+    /// <returns>
+    /// Значение true, если треугольник существует.
+    /// Значение false, если треугольника не существует.
+    /// </returns>
     public override bool isValidateInput()
     {
         if (_sides[2] >= _sides[0] + _sides[1]) return false;
@@ -38,6 +54,13 @@ public class Triangle : FigureBase
         return true;
     }
 
+    /// <summary>
+    /// Метод, проверяющий треугольник на прямоугольность.
+    /// </summary>
+    /// <returns>
+    /// Значение true, если треугольник прямоугольный.
+    /// Значение false, если треугольник не прямоугольный.
+    /// </returns>
     private bool isRightTriangle()
     {
         if (Math.Pow(_sides[2], 2) == Math.Pow(_sides[1], 2) + Math.Pow(_sides[0], 2)) return true;
@@ -45,6 +68,12 @@ public class Triangle : FigureBase
         return false;
     }
 
+    /// <summary>
+    /// Вспомогательный метод, добавляющий входные значения в список сторон треугольнка
+    /// </summary>
+    /// <param name="firstSide">Первая сторона</param>
+    /// <param name="secondSide">Вторая сторона</param>
+    /// <param name="thirdSide">Третья сторона</param>
     private void AddElementInList(double firstSide, double secondSide, double thirdSide)
     {
         _sides.Add(firstSide);
