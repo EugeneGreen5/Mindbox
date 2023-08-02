@@ -1,6 +1,6 @@
 ﻿namespace Mindbox.Task.Shapes;
 
-internal class Triangle : FigureBase
+public class Triangle : FigureBase
 {
     private List<double> _sides = new List<double>(3);
 
@@ -26,14 +26,14 @@ internal class Triangle : FigureBase
         if (_isRight) return _sides[0] * _sides[1] / 2;
 
         #region Реализация 1-ой формулы Герона
-        double semiperimeter = 0.5 * _sides[0] * _sides[1] * _sides[2];
-        return Math.Sqrt(semiperimeter * (semiperimeter - _sides[0] - _sides[1] - _sides[2]));
+        double semiperimeter = 0.5 * (_sides[0] + _sides[1] + _sides[2]);
+        return Math.Round(Math.Sqrt(semiperimeter * (semiperimeter - _sides[0]) * (semiperimeter - _sides[1]) * (semiperimeter - _sides[2])),5);
         #endregion
     }
 
     public override bool isValidateInput()
     {
-        if (_sides.Any(x => x < 0) || _sides[2] > _sides[0] + _sides[1]) return false;
+        if (_sides[2] >= _sides[0] + _sides[1]) return false;
 
         return true;
     }
